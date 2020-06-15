@@ -12,8 +12,21 @@ public class UserService {
     private UserRepository userRepository;
 
     //Call the registerUser() method in the UserRepository class to persist the user record in the database
-    public void registerUser(User newUser) {
-        userRepository.registerUser(newUser);
+    public boolean registerUser(User newUser) {
+
+        boolean goodOrBad = true;
+        String password = newUser.getPassword();
+
+        if(password.matches("(?=.*[0-9]).*") && password.matches("(?=.*[[a-zA-Z]]).*") && password.matches("(?=.*[~!@#$%^&*()_-]).*")){
+
+            userRepository.registerUser(newUser);
+            goodOrBad=true;
+        }else{
+            goodOrBad = false;
+        }
+
+        return goodOrBad;
+
     }
 
     //Since we did not have any user in the database, therefore the user with username 'upgrad' and password 'password' was hard-coded
