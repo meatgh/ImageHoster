@@ -3,6 +3,7 @@ package ImageHoster.controller;
 import ImageHoster.model.Image;
 import ImageHoster.model.Tag;
 import ImageHoster.model.User;
+
 import ImageHoster.service.ImageService;
 import ImageHoster.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class ImageController {
 
     @Autowired
     private TagService tagService;
+
+
 
     //This method displays all the images in the user home page after successful login
     @RequestMapping("images")
@@ -187,4 +190,9 @@ public class ImageController {
 
         return tagString.toString();
     }
+
+
+
+
+
 }

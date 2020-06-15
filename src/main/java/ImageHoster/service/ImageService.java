@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 public class ImageService {
+
     @Autowired
     private ImageRepository imageRepository;
 
@@ -45,5 +46,7 @@ public class ImageService {
     public void deleteImage(Integer imageId) {
         imageRepository.deleteImage(imageId);
     }
+
+
 
 }
