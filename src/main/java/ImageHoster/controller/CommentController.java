@@ -48,10 +48,14 @@ public class CommentController {
         commentToUpload.setUser(user);
 
         commentService.createComment(commentToUpload);
-        List<javax.xml.stream.events.Comment> comments = commentService.getAllComments();
+        List<Comment> comments = image.getComments();
+//        System.out.println(comments);
+        comments.add(commentToUpload);
+        image.setComments(comments);
+       imageService.updateImage(image);
 
-        model.addAttribute("comments", image.getComments());
-        model.addAttribute("image", image);
+        model.addAttribute("comments", commentService.getAllComments());
+        model.addAttribute("image", image.getComments());
         model.addAttribute("tags", image.getTags());
 
 

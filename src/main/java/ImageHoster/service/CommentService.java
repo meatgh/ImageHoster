@@ -1,5 +1,6 @@
 package ImageHoster.service;
 
+import ImageHoster.model.Comment;
 import ImageHoster.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class CommentService {
     private CommentRepository commentRepository;
 
     //Call the getAllComments() method in the Repository and obtain a List of all the images in the database
-    public List<javax.xml.stream.events.Comment> getAllComments(){
+    public List<Comment> getAllComments(){
 
         return commentRepository.getAllComments();
 

@@ -1,9 +1,11 @@
 package ImageHoster.repository;
 
+import ImageHoster.model.Image;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
-import javax.xml.stream.events.Comment;
+import ImageHoster.model.Comment;
+
 import java.util.List;
 
 @Repository
@@ -15,7 +17,7 @@ public class CommentRepository {
     @PersistenceUnit(unitName = "imageHoster")
     private EntityManagerFactory emf;
 
-    public javax.xml.stream.events.Comment createComment(ImageHoster.model.Comment newComment){
+    public Comment createComment(Comment newComment){
 
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
@@ -28,7 +30,7 @@ public class CommentRepository {
             transaction.rollback();
         }
 
-        return (Comment) newComment;
+        return newComment;
     }
 
     public List<Comment> getAllComments(){
@@ -36,7 +38,8 @@ public class CommentRepository {
         EntityManager em = emf.createEntityManager();
 
         TypedQuery<Comment> query = em.createQuery("SELECT c from Comment c", Comment.class);
-        List<Comment> resultList = (List) query.getResultList();
+        List<Comment> resultList = query.getResultList();
+
         return resultList;
 
 

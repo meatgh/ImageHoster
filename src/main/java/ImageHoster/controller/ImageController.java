@@ -104,6 +104,7 @@ public class ImageController {
         String tags = convertTagsToString(image.getTags());
         model.addAttribute("image", image);
         model.addAttribute("tags", tags);
+        model.addAttribute("comments", image.getComments());
         return "images/edit";
     }
 
@@ -119,7 +120,7 @@ public class ImageController {
     //The method also receives tags parameter which is a string of all the tags separated by a comma using the annotation @RequestParam
     //The method converts the string to a list of all the tags using findOrCreateTags() method and sets the tags attribute of an image as a list of all the tags
     @RequestMapping(value = "/editImage", method = RequestMethod.PUT)
-    public String editImageSubmit(@RequestParam("file") MultipartFile file, @RequestParam("imageId") Integer imageId, @RequestParam("tags") String tags, Image updatedImage, HttpSession session) throws IOException {
+    public String editImageSubmit(@RequestParam("file") MultipartFile file, @RequestParam("imageId") Integer imageId, @RequestParam("tags") String tags, Image updatedImage, HttpSession session, Model model) throws IOException {
 
         Image image = imageService.getImage(imageId);
         String updatedImageData = convertUploadedFileToBase64(file);
@@ -135,9 +136,13 @@ public class ImageController {
         User user = (User) session.getAttribute("loggeduser");
         updatedImage.setUser(user);
         updatedImage.setTags(imageTags);
+        updatedImage.setComments(image.getComments());
         updatedImage.setDate(new Date());
 
+
+
         imageService.updateImage(updatedImage);
+
         return "redirect:/images/" + updatedImage.getTitle();
     }
 
