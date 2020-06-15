@@ -3,6 +3,7 @@ package ImageHoster.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 //@Entity annotation specifies that the corresponding class is a JPA entity
@@ -36,11 +37,11 @@ public class Comment {
         this.text = text;
     }
 
-    public LocalDate getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -64,7 +65,7 @@ public class Comment {
     private String text;
 
     @Column(name = "date")
-    private LocalDate createdDate;
+    private Date createdDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     //Below annotation indicates that the name of the column in 'comments' table referring the primary key in 'users' table will be 'user_id'

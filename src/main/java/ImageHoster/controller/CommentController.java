@@ -2,6 +2,8 @@ package ImageHoster.controller;
 
 import ImageHoster.model.Image;
 import ImageHoster.model.User;
+import  ImageHoster.model.Comment;
+import ImageHoster.service.CommentService;
 import ImageHoster.service.ImageService;
 import ImageHoster.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class CommentController {
@@ -26,33 +30,36 @@ public class CommentController {
     @Autowired
     private TagService tagService;
 
+    @Autowired
+    private CommentService commentService;
+
 
 
     @RequestMapping(value="/image/{imageId}/{imageTitle}/comments",method= RequestMethod.POST)
     public String SubmitComment(@PathVariable("imageId")Integer imageId, @PathVariable("imageTitle")String imageTitle , @RequestParam(name="comment")String comment, HttpSession session, Model model)
     {
-
-
-
-
-
-
+        Comment commentToUpload = new Comment();
         Image image = imageService.getImage(imageId);
         User user = (User) session.getAttribute("loggeduser");
 
+        commentToUpload.setText(comment);
+        commentToUpload.setImage(image);
+        commentToUpload.setCreatedDate(new Date());
+        commentToUpload.setUser(user);
+
+        commentService.createComment(commentToUpload);
+        List<javax.xml.stream.events.Comment> comments = commentService.getAllComments();
+
+        model.addAttribute("comments", image.getComments());
+        model.addAttribute("image", image);
+        model.addAttribute("tags", image.getTags());
 
 
 
 
-        return "images/imageID/imagetitle";
-
-
-
-
+        return "images/image";
 
     }
 
-    private String convertUploadedFileToBase64(MultipartFile file) throws IOException {
-        return Base64.getEncoder().encodeToString(file.getBytes());
-    }
+
 }
