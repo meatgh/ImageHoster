@@ -39,8 +39,9 @@ public class CommentController {
     public String SubmitComment(@PathVariable("imageId")Integer imageId, @PathVariable("imageTitle")String imageTitle , @RequestParam(name="comment")String comment, HttpSession session, Model model)
     {
         Comment commentToUpload = new Comment();
-        Image image = imageService.getImage(imageId);
+        Image image = image = imageService.getImageByTitle(imageTitle);
         User user = (User) session.getAttribute("loggeduser");
+
 
         commentToUpload.setText(comment);
         commentToUpload.setImage(image);
@@ -54,9 +55,9 @@ public class CommentController {
         image.setComments(comments);
        imageService.updateImage(image);
 
-        model.addAttribute("comments", commentService.getAllComments());
-        model.addAttribute("image", image.getComments());
+        model.addAttribute("image", image);
         model.addAttribute("tags", image.getTags());
+        model.addAttribute("comments", image.getComments());
 
 
 
