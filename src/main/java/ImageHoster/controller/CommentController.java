@@ -39,7 +39,7 @@ public class CommentController {
     public String SubmitComment(@PathVariable("imageId")Integer imageId, @PathVariable("imageTitle")String imageTitle , @RequestParam(name="comment")String comment, HttpSession session, Model model)
     {
         Comment commentToUpload = new Comment();
-        Image image = image = imageService.getImageByTitle(imageTitle);
+        Image image = image = imageService.getImage(imageId);
         User user = (User) session.getAttribute("loggeduser");
 
 
