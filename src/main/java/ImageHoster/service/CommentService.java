@@ -14,7 +14,7 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    //Call the getAllComments() method in the Repository and obtain a List of all the images in the database
+    //Call the getAllComments() method in the Repository and obtain a List of all the comments in the database
     public List<Comment> getAllComments(){
 
         return commentRepository.getAllComments();

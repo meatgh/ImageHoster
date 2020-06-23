@@ -16,7 +16,7 @@ public class UserService {
 
         boolean goodOrBad = true;
         String password = newUser.getPassword();
-
+//checking for password strength at the time of user registration
         if(password.matches("(?=.*[0-9]).*") && password.matches("(?=.*[[a-zA-Z]]).*") && password.matches("(?=.*[~!@#$%^&*()_-]).*")){
 
             userRepository.registerUser(newUser);

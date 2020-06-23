@@ -41,7 +41,7 @@ public class UserController {
     //This method calls the business logic and after the user record is persisted in the database, directs to login page
     @RequestMapping(value = "users/registration", method = RequestMethod.POST)
     public String registerUser(User user, Model model) {
-        //userService.registerUser(user);
+        //added the password strength check feature - making service do this work and having controller do only the routing with relevant model/data
         String error = "Password must contain atleast 1 alphabet, 1 number & 1 special character";
 
         if(userService.registerUser(user)){

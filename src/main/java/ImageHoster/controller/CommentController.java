@@ -21,6 +21,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
+//controller class to deal with all the mappings and relevant service and repo calls related to the comments feature
 @Controller
 public class CommentController {
 
@@ -34,7 +35,7 @@ public class CommentController {
     private CommentService commentService;
 
 
-
+//when a comment is posted, this method is mapped and it updates the image with the new comments list and also the tags etc. then loads the same and shows it to the user
     @RequestMapping(value="/image/{imageId}/{imageTitle}/comments",method= RequestMethod.POST)
     public String SubmitComment(@PathVariable("imageId")Integer imageId, @PathVariable("imageTitle")String imageTitle , @RequestParam(name="comment")String comment, HttpSession session, Model model)
     {
